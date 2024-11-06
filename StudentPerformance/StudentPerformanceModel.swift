@@ -2,37 +2,39 @@
 //  StudentPerformance.swift
 //  StudentPerformance
 //
-//  Created by admin63 on 06/11/24.
+//  Created by hariharan on 06/11/24.
 //
 
-
-import SwiftUI
-
-// MARK: - Student Model with Prediction Function
+import Foundation
+import CoreML
 
 struct StudentPerformance {
-    var hoursStudied: Int
-    var previousScores: Int
-    var extracurricularActivities: Bool
-    var sleepHours: Int
-    var questionPapersPracticed: Int
+    let hoursStudied: Int64
+    let previousScores: Int64
+    let extracurricularActivities: Bool
+    let sleepHours: Int64
+    let questionPapersPracticed: Int64
     
-    // Function to calculate performance index based on provided inputs
     func calculatePerformanceIndex() -> Double {
-        var performanceIndex = Double(previousScores)
-        
-        // Weight factors for each input (customizable for a simple model)
-        let studyFactor = 0.4
-        let sleepFactor = 0.2
-        let activityFactor = extracurricularActivities ? 1.05 : 0.95
-        let practiceFactor = 0.3
-        
-        performanceIndex += studyFactor * Double(hoursStudied)
-        performanceIndex += sleepFactor * Double(sleepHours)
-        performanceIndex += practiceFactor * Double(questionPapersPracticed)
-        performanceIndex *= activityFactor
-        
-        // Constrain performance index within realistic bounds
-        return min(100.0, max(0.0, performanceIndex))
+        do {
+            let model = try StudentPerformancePredictor(configuration: MLModelConfiguration())
+            
+            // Convert `Bool` to "Yes"/"No" String for model input
+            let activitiesString = extracurricularActivities ? "Yes" : "No"
+            
+            let input = StudentPerformancePredictorInput(
+                Hours_Studied: hoursStudied,
+                Previous_Scores: previousScores,
+                Extracurricular_Activities: activitiesString,
+                Sleep_Hours: sleepHours,
+                Sample_Question_Papers_Practiced: questionPapersPracticed
+            )
+            
+            let prediction = try model.prediction(input: input)
+            return prediction.Performance_Index
+        } catch {
+            print("Error in prediction: \(error)")
+            return 0.0
+        }
     }
 }
