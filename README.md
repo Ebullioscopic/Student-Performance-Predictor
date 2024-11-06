@@ -2,6 +2,12 @@
 
 **Student Performance Predictor** is a SwiftUI app designed to predict a student's performance index based on several input factors. The app utilizes a CoreML model for making predictions, taking into account study habits, health factors, and exam preparation efforts. This project is a comprehensive guide to cloning, setting up, and running the app locally.
 
+## Screenshot
+
+<p align="center">
+  <img src="https://github.com/Ebullioscopic/Student-Performance-Predictor/blob/main/images/image.png" alt="Screenshot" width="500"/>
+</p>
+
 ## Table of Contents
 
 1. [Overview](#overview)
