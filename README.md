@@ -51,7 +51,7 @@ Follow these steps to set up the **Student Performance Predictor** project local
 First, clone the project repository to your local machine.
 
 ```bash
-git clone https://github.com/Ebullioscopic/StudentPerformancePredictor.git
+git clone https://github.com/Ebullioscopic/Student-Performance-Predictor.git
 cd StudentPerformancePredictor
 ```
 
@@ -59,7 +59,7 @@ cd StudentPerformancePredictor
 
 1. Open Xcode (13.0 or later).
 2. Navigate to `File > Open`.
-3. Select the `StudentPerformancePredictor.xcodeproj` file inside the cloned repository folder.
+3. Select the `StudentPerformance.xcodeproj` file inside the cloned repository folder.
 
 ### 3. Integrate the ML Model
 
